@@ -44,11 +44,48 @@ public class UserController {
             mav.addObject("msg", "存款失败！请查询问题！");
             return mav;
         }
-        //session.setAttribute("user",u);
         mav.addObject("msg","存款成功！");
-        mav.addObject("home");
+        u.setMoney(u.getMoney()+money);
+        session.setAttribute("user",u);
         return mav;
     }
     //用户取钱
+    @RequestMapping("getMoney.action")
+    public ModelAndView getMoney(String uname, double money,HttpSession session){
+        ModelAndView mav=new ModelAndView();
+        //此处可以做用户是否登录的验证
+        Users u=(Users)session.getAttribute("user");
+        //执行业务层操作
+        int i=userService.getMoney(u.getUname(),money);
+        session.setAttribute("user",u);
+        //返回前端，跳转页面
+        mav.setViewName("home");
+        if(i<=0) {
+            mav.addObject("msg", "取款失败！请查询问题！");
+            return mav;
+        }
+        mav.addObject("msg","取款成功！");
+        u.setMoney(u.getMoney()-money);
+        session.setAttribute("user",u);
+        return mav;
+    }
     //用户转账
+    @RequestMapping("atob.action")
+    public ModelAndView aToB(String bname, double money,HttpSession session){
+        ModelAndView mav=new ModelAndView();
+        //此处可以做用户是否登录的验证
+        Users u=(Users)session.getAttribute("user");
+        //执行业务层操作
+        int i=userService.aTob(u.getUname(),bname,money);
+        //返回前端，跳转页面
+        mav.setViewName("home");
+        if(i<=1) {
+            mav.addObject("msg", "转账失败！请查询问题！");
+            return mav;
+        }
+        mav.addObject("msg","转账成功！");
+        u.setMoney(u.getMoney()-money);
+        session.setAttribute("user",u);
+        return mav;
+    }
 }

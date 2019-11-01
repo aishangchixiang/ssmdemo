@@ -14,11 +14,8 @@
 <p>这是主页</p>
 <p>当前登录用户：${user.uname}</p>
 <p>当前用户可用金额：${user.money}</p>
-<p>${msg}</p>
-<form action="/portal/users/setMoney.action" method="post">
-    存款金额：<input type="text" placeholder="请输入金额" name="money">
-    <br>
-    <input type="submit" value="确认存钱">
-</form>
+<p><a href="${pageContext.request.contextPath}/qukuan.jsp">取款</a></p>
+<p><a href="${pageContext.request.contextPath}/cunkuan.jsp">存款</a></p>
+<p><a href="${pageContext.request.contextPath}/zhuanzhang.jsp">转账</a></p>
 </body>
 </html>

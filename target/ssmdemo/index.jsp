@@ -42,6 +42,7 @@
             <br>
             <input type="submit" value="登录">
         </form>
+    <%--<p><a href="${pageContext.request.contextPath}/zhuce.jsp">注册</a></p>--%>
 </div>
 </body>
 </html>

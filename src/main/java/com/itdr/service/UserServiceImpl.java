@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 public class UserServiceImpl implements UserService {
     @Autowired
     UsersMapper usersMapper;
+    //登录
     @Override
     public Users login(String uname,String psd) {
         Users u=null;
@@ -46,6 +47,9 @@ public class UserServiceImpl implements UserService {
     //转账
     @Override
     public int aTob(String aname, String bname, double money) {
+        if(StringUtils.isEmpty(bname)){
+            return 0;
+        }
         if(money<=0){
             return 0;
         }
